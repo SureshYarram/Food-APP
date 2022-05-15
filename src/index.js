@@ -5,15 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import {AnimatePresence} from "framer-motion"
+import { Provider} from 'react-redux';
+import { store } from './Redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
     <BrowserRouter>
     <AnimatePresence>
     <App />
     </AnimatePresence>
     </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

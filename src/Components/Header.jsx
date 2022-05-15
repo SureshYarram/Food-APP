@@ -3,7 +3,12 @@ import Logo from "../img/logo.png";
 import {MdShoppingBasket}  from "react-icons/md";
 import avatar from "../img/avatar.png"
 import {motion} from "framer-motion"
+
+
+
 export const Header = ()=>{
+
+
 
 
     return(
