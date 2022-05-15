@@ -21,6 +21,8 @@ export const Header = ()=>{
      const user = useSelector((store)=>store.login.user);
      console.log(user)
       
+
+     // ------------------------------USER login------------------------------------->>>>>>>.
        const login = async()=>{
        
         if(!user){
@@ -33,10 +35,15 @@ export const Header = ()=>{
         else{
             setMenu(!menu)
         }
-      
    }  
 
-   
+   // ---------------------LOGOUT Function ----------------------------->>>>>>>>>>>>
+
+       const Logout = ()=>{
+           setMenu(false);
+           localStorage.clear();
+           dispatch(SettingUser(null))
+       }
 
     return(
         <div className="fixed flex z-50 bg-slate-500 w-screen h-14 px-10">
@@ -71,7 +78,7 @@ export const Header = ()=>{
                           <Link to="/create"> <p className="items-center flex px-3 gap-2 hover:bg-red-200" >New Item <MdAdd/> </p></Link>
                             )
                         }
-                             <p className="items-center flex px-3 gap-6 mt-1 hover:bg-red-200">Logout  <MdLogout/></p>
+                             <p onClick={Logout} className="items-center flex px-3 gap-6 mt-1 hover:bg-red-200">Logout  <MdLogout/></p>
                          </div>
                      )
                  }
