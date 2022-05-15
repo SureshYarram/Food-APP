@@ -1,31 +1,39 @@
 
 import Logo from "../img/logo.png";
-import {MdShoppingBasket}  from "react-icons/md";
+import {MdShoppingBasket , MdAdd , MdLogout}  from "react-icons/md";
 import avatar from "../img/avatar.png"
 import {motion} from "framer-motion"
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../firebase.config";
 import { useState } from "react";
 import { SettingUser } from "../Redux/Login/action";
-import {useDispatch , useSelector} from "react-redux"
+import {useDispatch , useSelector} from "react-redux";
+import { Link } from "react-router-dom";
 
 export const Header = ()=>{
      
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const [menu,setMenu] = useState(false)
      const firebaseauth = getAuth(app);
      const provider = new GoogleAuthProvider();
 
 
      const user = useSelector((store)=>store.login.user);
      console.log(user)
+      
+       const login = async()=>{
        
-   const login = async()=>{
-    
-      const { user  } = await signInWithPopup(firebaseauth,provider);
+        if(!user){
+            const { user  } = await signInWithPopup(firebaseauth,provider);
        console.log(user.photoURL)
        dispatch(SettingUser(user.providerData[0]))
     
-    localStorage.setItem("user", JSON.stringify(user.providerData[0]))
+         localStorage.setItem("user", JSON.stringify(user.providerData[0]))
+        }
+        else{
+            setMenu(!menu)
+        }
+      
    }  
 
    
@@ -52,8 +60,21 @@ export const Header = ()=>{
 
              </div>
 
-             <div className="h-7 w-7 mt-3.5 ml-9 cursor-pointer">
-                 <motion.img whileTap={{scale:0.6}} src={ user ? user.photoURL:avatar} alt="userprofile"  onClick={login} />
+             <div className="h-7 w-7 mt-3.5 ml-9 cursor-pointer rounded-full">
+                 <motion.img className="rounded-full" whileTap={{scale:0.6}} src={ user ? user.photoURL:avatar} alt="userprofile"  onClick={login} />
+
+                 {
+                     menu && (
+                        <div className="w-48 -ml-16 bg-stone-100 mt-3 ">
+                        {
+                            user && user.email==="sureshchowdary540@gmail.com" && (
+                          <Link to="/create"> <p className="items-center flex px-3 gap-2 hover:bg-red-200" >New Item <MdAdd/> </p></Link>
+                            )
+                        }
+                             <p className="items-center flex px-3 gap-6 mt-1 hover:bg-red-200">Logout  <MdLogout/></p>
+                         </div>
+                     )
+                 }
              </div>
              
         </div>
