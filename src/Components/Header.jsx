@@ -1,6 +1,8 @@
 
-import Logo from "./img/logo.png"
-import {MdShoppingBasket}  from "react-icons/md"
+import Logo from "../img/logo.png";
+import {MdShoppingBasket}  from "react-icons/md";
+import avatar from "../img/avatar.png"
+import {motion} from "framer-motion"
 export const Header = ()=>{
 
 
@@ -12,19 +14,24 @@ export const Header = ()=>{
              </div>
              <div className="ml-auto">
                  <ul className="flex  items-center gap-7 mt-3 " >
-                     <li>Home</li>
-                     <li>Menu</li>
-                     <li>About Us</li>
-                     <li>Service</li>
+                     <li className="cursor-pointer">Home</li>
+                     <li className="cursor-pointer">Menu</li>
+                     <li className="cursor-pointer">About Us</li>
+                     <li className="cursor-pointer">Service</li>
                  </ul>
              </div>
-             <div className="ml-16 mt-3 h-9 flex">
+             <div className="ml-16 mt-3.5 h-9 flex">
             <MdShoppingBasket className="text-2xl cursor-pointer" />
             <div className="h-5 w-5 rounded-full bg-rose-600 relative -top-2 -left-2">
                 <p className="text-sm absolute ml-1.5 -mt-0.5 font-semibold text-white">2</p>
             </div>
+
              </div>
 
+             <div className="h-7 w-7 mt-3.5 ml-9 cursor-pointer">
+                 <motion.img whileTap={{scale:0.6}} src={avatar} alt="userprofile"  />
+             </div>
+             
         </div>
     )
 
