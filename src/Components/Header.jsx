@@ -18,8 +18,11 @@ export const Header = ()=>{
                      <li>Service</li>
                  </ul>
              </div>
-             <div className="ml-16 mt-3 h-9">
-      <MdShoppingBasket className="text-2xl" />
+             <div className="ml-16 mt-3 h-9 flex">
+            <MdShoppingBasket className="text-2xl cursor-pointer" />
+            <div className="h-5 w-5 rounded-full bg-rose-600 relative -top-2 -left-2">
+                <p className="text-sm absolute ml-1.5 -mt-0.5 font-semibold text-white">2</p>
+            </div>
              </div>
 
         </div>
