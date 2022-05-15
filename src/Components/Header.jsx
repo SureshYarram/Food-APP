@@ -3,13 +3,32 @@ import Logo from "../img/logo.png";
 import {MdShoppingBasket}  from "react-icons/md";
 import avatar from "../img/avatar.png"
 import {motion} from "framer-motion"
-
-
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from "../firebase.config";
+import { useState } from "react";
+import { SettingUser } from "../Redux/Login/action";
+import {useDispatch , useSelector} from "react-redux"
 
 export const Header = ()=>{
+     
+    const dispatch = useDispatch()
+     const firebaseauth = getAuth(app);
+     const provider = new GoogleAuthProvider();
 
 
+     const user = useSelector((store)=>store.login.user);
+     console.log(user)
+       
+   const login = async()=>{
+    
+      const { user  } = await signInWithPopup(firebaseauth,provider);
+       console.log(user.photoURL)
+       dispatch(SettingUser(user.providerData[0]))
+    
+    localStorage.setItem("user", JSON.stringify(user.providerData[0]))
+   }  
 
+   
 
     return(
         <div className="fixed flex z-50 bg-slate-500 w-screen h-14 px-10">
@@ -34,7 +53,7 @@ export const Header = ()=>{
              </div>
 
              <div className="h-7 w-7 mt-3.5 ml-9 cursor-pointer">
-                 <motion.img whileTap={{scale:0.6}} src={avatar} alt="userprofile"  />
+                 <motion.img whileTap={{scale:0.6}} src={ user ? user.photoURL:avatar} alt="userprofile"  onClick={login} />
              </div>
              
         </div>
