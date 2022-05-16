@@ -1,3 +1,4 @@
+import { HomeContainer } from "./HomeContainer"
 
 
 
@@ -5,6 +6,8 @@ export const MainContainer = ()=>{
 
     
     return(
-        <div>Main</div>
+      <div>
+          <HomeContainer/>
+      </div>
     )
 }

@@ -10,7 +10,7 @@ import { SettingUser } from "../Redux/Login/action";
 import {useDispatch , useSelector} from "react-redux";
 import { Link } from "react-router-dom";
 
-export const Header = ()=>{
+export const Navbar = ()=>{
      
     const dispatch = useDispatch();
     const [menu,setMenu] = useState(false)
@@ -27,7 +27,7 @@ export const Header = ()=>{
        
         if(!user){
             const { user  } = await signInWithPopup(firebaseauth,provider);
-       console.log(user.photoURL)
+                  console.log(user.photoURL)
        dispatch(SettingUser(user.providerData[0]))
     
          localStorage.setItem("user", JSON.stringify(user.providerData[0]))
@@ -46,7 +46,7 @@ export const Header = ()=>{
        }
 
     return(
-        <div className="fixed flex z-50 bg-slate-500 w-screen h-14 px-10">
+        <div className="flex z-50 bg-slate-500 w-screen h-14 px-10 mb-11">
              
              <div>
                  <img src={Logo} alt="logo" className="h-12 w-14 m-1 flex" />
@@ -67,7 +67,7 @@ export const Header = ()=>{
 
              </div>
 
-             <div className="h-7 w-7 mt-3.5 ml-9 cursor-pointer rounded-full">
+             <div className="h-10 w-10 mt-2 ml-9 cursor-pointer rounded-full">
                  <motion.img className="rounded-full" whileTap={{scale:0.6}} src={ user ? user.photoURL:avatar} alt="userprofile"  onClick={login} />
 
                  {
